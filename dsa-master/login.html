@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - DSA Tracker</title>
+    <link rel="stylesheet" href="styles/shared.css">
+    <link rel="stylesheet" href="styles/login.css">
+    <!-- Google Sign-In API -->
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
+</head>
+<body>
+    <div id="app">
+        <!-- Loading Screen -->
+        <div id="loading-screen" class="loading-screen">
+            <div class="loading-content">
+                <h2>DSA Tracker</h2>
+                <div class="loading-spinner"></div>
+            </div>
+        </div>
+
+        <!-- Authentication View -->
+        <div id="auth-view" class="auth-view">
+            <div class="auth-container">
+                <div class="auth-card card">
+                    <div class="auth-header">
+                        <h1>DSA Tracker</h1>
+                        <p>Master Data Structures & Algorithms with structured practice</p>
+                    </div>
+                    
+                    <!-- Login Form -->
+                    <div id="login-form" class="auth-form">
+                        <h2>Sign In</h2>
+                        <form id="login-form-element">
+                            <div class="form-group">
+                                <label class="form-label" for="login-username">Username</label>
+                                <input type="text" id="login-username" class="form-control" required>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label" for="login-password">Password</label>
+                                <input type="password" id="login-password" class="form-control" required>
+                            </div>
+                            <button type="submit" class="btn btn--primary btn--full-width">Sign In</button>
+                        </form>
+                        
+                        <!-- Google Sign-In -->
+                        <div class="auth-divider">
+                            <span>or</span>
+                        </div>
+                        <div id="g_id_onload"
+                             data-client_id="123456789-abcdefghijklmnopqrstuvwxyz123456.apps.googleusercontent.com"
+                             data-callback="handleGoogleSignIn"
+                             data-auto_prompt="false">
+                        </div>
+                        <div class="g_id_signin" 
+                             data-type="standard"
+                             data-size="large"
+                             data-theme="outline"
+                             data-text="sign_in_with"
+                             data-shape="rectangular"
+                             data-logo_alignment="left">
+                        </div>
+                        
+                        <p class="auth-switch">
+                            Don't have an account? 
+                            <a href="#" id="switch-to-signup">Create one</a>
+                        </p>
+                    </div>
+
+                    <!-- Signup Form -->
+                    <div id="signup-form" class="auth-form hidden">
+                        <h2>Create Account</h2>
+                        <form id="signup-form-element">
+                            <div class="form-group">
+                                <label class="form-label" for="signup-username">Username</label>
+                                <input type="text" id="signup-username" class="form-control" required>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label" for="signup-password">Password</label>
+                                <input type="password" id="signup-password" class="form-control" required>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label" for="signup-confirm">Confirm Password</label>
+                                <input type="password" id="signup-confirm" class="form-control" required>
+                            </div>
+                            <button type="submit" class="btn btn--primary btn--full-width">Create Account</button>
+                        </form>
+                        
+                        <!-- Google Sign-In -->
+                        <div class="auth-divider">
+                            <span>or</span>
+                        </div>
+                        <div class="g_id_signin" 
+                             data-type="standard"
+                             data-size="large"
+                             data-theme="outline"
+                             data-text="sign_up_with"
+                             data-shape="rectangular"
+                             data-logo_alignment="left">
+                        </div>
+                        
+                        <p class="auth-switch">
+                            Already have an account? 
+                            <a href="#" id="switch-to-login">Sign in</a>
+                        </p>
+                    </div>
+
+                    <div id="auth-error" class="auth-error hidden"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/shared.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/login.js"></script>
+</body>
+</html>

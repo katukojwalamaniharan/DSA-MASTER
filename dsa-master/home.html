@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DSA Tracker - Master Data Structures & Algorithms</title>
+    <link rel="stylesheet" href="styles/shared.css">
+    <link rel="stylesheet" href="styles/home.css">
+</head>
+<body>
+    <div id="app">
+        <!-- Main App with Navigation -->
+        <div id="main-app" class="main-app">
+            <!-- Header -->
+            <header class="app-header">
+                <div class="header-content">
+                    <div class="header-left">
+                        <h1 class="app-title">DSA Tracker</h1>
+                    </div>
+                    <nav class="header-nav">
+                        <a href="#" class="nav-link" data-view="dashboard">Dashboard</a>
+                        <a href="#" class="nav-link" data-view="patterns">Patterns</a>
+                        <a href="#" class="nav-link" data-view="profile">Profile</a>
+                    </nav>
+                    <div class="header-right">
+                        <span id="user-name" class="user-name"></span>
+                        <button id="logout-btn" class="btn btn--sm btn--outline">Logout</button>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Main Content -->
+            <main class="main-content">
+                <!-- Dashboard View -->
+                <div id="dashboard-view" class="view">
+                    <div class="container">
+                        <div class="dashboard-header">
+                            <h2>Dashboard</h2>
+                            <p>Track your progress across DSA patterns</p>
+                        </div>
+
+                        <!-- Stats Overview -->
+                        <div class="stats-grid">
+                            <div class="stat-card card">
+                                <div class="stat-icon">📊</div>
+                                <div class="stat-content">
+                                    <h3 id="total-completed">0</h3>
+                                    <p>Questions Completed</p>
+                                </div>
+                            </div>
+                            <div class="stat-card card">
+                                <div class="stat-icon">🎯</div>
+                                <div class="stat-content">
+                                    <h3 id="completion-percentage">0%</h3>
+                                    <p>Overall Progress</p>
+                                </div>
+                            </div>
+                            <div class="stat-card card">
+                                <div class="stat-icon">🔥</div>
+                                <div class="stat-content">
+                                    <h3 id="current-streak">0</h3>
+                                    <p>Day Streak</p>
+                                </div>
+                            </div>
+                            <div class="stat-card card">
+                                <div class="stat-icon">⭐</div>
+                                <div class="stat-content">
+                                    <h3 id="patterns-mastered">0</h3>
+                                    <p>Patterns Mastered</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Progress by Pattern -->
+                        <div class="progress-section">
+                            <h3>Progress by Pattern</h3>
+                            <div id="pattern-progress" class="pattern-progress">
+                                <!-- Pattern progress items will be generated here -->
+                            </div>
+                        </div>
+
+                        <!-- Quick Actions -->
+                        <div class="quick-actions">
+                            <h3>Quick Actions</h3>
+                            <div class="actions-grid">
+                                <button class="action-card card" data-view="patterns">
+                                    <span class="action-icon">📚</span>
+                                    <h4>Browse Patterns</h4>
+                                    <p>Explore all DSA patterns</p>
+                                </button>
+                                <button class="action-card card" id="continue-learning">
+                                    <span class="action-icon">🎓</span>
+                                    <h4>Continue Learning</h4>
+                                    <p>Resume where you left off</p>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Patterns View -->
+                <div id="patterns-view" class="view hidden">
+                    <div class="container">
+                        <div class="patterns-header">
+                            <h2>DSA Patterns</h2>
+                            <p>Master algorithms through 10 fundamental patterns</p>
+                        </div>
+
+                        <!-- Search and Filters -->
+                        <div class="patterns-controls">
+                            <div class="search-bar">
+                                <input type="text" id="pattern-search" class="form-control" placeholder="Search patterns...">
+                            </div>
+                            <div class="filter-options">
+                                <select id="difficulty-filter" class="form-control">
+                                    <option value="">All Difficulties</option>
+                                    <option value="Easy">Easy</option>
+                                    <option value="Medium">Medium</option>
+                                    <option value="Hard">Hard</option>
+                                </select>
+                                <select id="progress-filter" class="form-control">
+                                    <option value="">All Progress</option>
+                                    <option value="not-started">Not Started</option>
+                                    <option value="in-progress">In Progress</option>
+                                    <option value="completed">Completed</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <!-- Patterns Grid -->
+                        <div id="patterns-grid" class="patterns-grid">
+                            <!-- Pattern cards will be generated here -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Pattern Detail View -->
+                <div id="pattern-detail-view" class="view hidden">
+                    <div class="container">
+                        <div class="pattern-detail-header">
+                            <button id="back-to-patterns" class="btn btn--outline btn--sm">← Back to Patterns</button>
+                            <div class="pattern-title-section">
+                                <h2 id="pattern-title"></h2>
+                                <p id="pattern-description"></p>
+                            </div>
+                            <div class="pattern-stats">
+                                <div class="pattern-stat">
+                                    <span id="pattern-completed-count">0</span>
+                                    <span>Completed</span>
+                                </div>
+                                <div class="pattern-stat">
+                                    <span id="pattern-total-count">0</span>
+                                    <span>Total</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Pattern Progress Bar -->
+                        <div class="pattern-progress-bar">
+                            <div class="progress-bar">
+                                <div id="pattern-progress-fill" class="progress-fill"></div>
+                            </div>
+                            <span id="pattern-progress-text" class="progress-text">0%</span>
+                        </div>
+
+                        <!-- Questions List -->
+                        <div class="questions-section">
+                            <div class="questions-header">
+                                <h3>Questions</h3>
+                                <div class="questions-controls">
+                                    <select id="question-difficulty-filter" class="form-control">
+                                        <option value="">All</option>
+                                        <option value="Easy">Easy</option>
+                                        <option value="Medium">Medium</option>
+                                        <option value="Hard">Hard</option>
+                                    </select>
+                                    <select id="question-status-filter" class="form-control">
+                                        <option value="">All Status</option>
+                                        <option value="completed">Completed</option>
+                                        <option value="todo">To Do</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div id="questions-list" class="questions-list">
+                                <!-- Questions will be generated here -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Question Detail View -->
+                <div id="question-detail-view" class="view hidden">
+                    <div class="container">
+                        <div class="question-detail-header">
+                            <button id="back-to-pattern" class="btn btn--outline btn--sm">← Back</button>
+                            <div class="question-actions">
+                                <button id="toggle-completion" class="btn btn--primary"></button>
+                            </div>
+                        </div>
+
+                        <div class="question-content">
+                            <div class="question-title-section">
+                                <h2 id="question-title"></h2>
+                                <div class="question-meta">
+                                    <span id="question-difficulty" class="status"></span>
+                                    <span id="question-pattern" class="question-pattern"></span>
+                                </div>
+                            </div>
+
+                            <div class="question-description">
+                                <h3>Description</h3>
+                                <p id="question-description-text"></p>
+                            </div>
+
+                            <div class="question-details">
+                                <div class="question-info">
+                                    <h4>Companies</h4>
+                                    <div id="question-companies" class="companies-list"></div>
+                                </div>
+                                <div class="question-links">
+                                    <h4>Practice Links</h4>
+                                    <a id="leetcode-link" href="#" target="_blank" class="btn btn--outline">
+                                        LeetCode Problem
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Profile View -->
+                <div id="profile-view" class="view hidden">
+                    <div class="container">
+                        <div class="profile-header">
+                            <h2>Profile</h2>
+                            <p>Your DSA learning journey statistics</p>
+                        </div>
+
+                        <div class="profile-content">
+                            <!-- User Info -->
+                            <div class="profile-section card">
+                                <h3>Account Information</h3>
+                                <div class="user-info">
+                                    <div class="info-item">
+                                        <span class="info-label">Username:</span>
+                                        <span id="profile-username" class="info-value"></span>
+                                    </div>
+                                    <div class="info-item">
+                                        <span class="info-label">Member Since:</span>
+                                        <span id="profile-join-date" class="info-value"></span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Detailed Stats -->
+                            <div class="profile-section card">
+                                <h3>Detailed Statistics</h3>
+                                <div class="detailed-stats">
+                                    <div class="stat-row">
+                                        <span>Total Questions Completed:</span>
+                                        <span id="profile-total-completed">0</span>
+                                    </div>
+                                    <div class="stat-row">
+                                        <span>Easy Questions:</span>
+                                        <span id="profile-easy-completed">0</span>
+                                    </div>
+                                    <div class="stat-row">
+                                        <span>Medium Questions:</span>
+                                        <span id="profile-medium-completed">0</span>
+                                    </div>
+                                    <div class="stat-row">
+                                        <span>Hard Questions:</span>
+                                        <span id="profile-hard-completed">0</span>
+                                    </div>
+                                    <div class="stat-row">
+                                        <span>Patterns Completed (100%):</span>
+                                        <span id="profile-patterns-mastered">0</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Achievements -->
+                            <div class="profile-section card">
+                                <h3>Achievements</h3>
+                                <div id="achievements-list" class="achievements">
+                                    <!-- Achievements will be generated here -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <script src="js/shared.js"></script>
+    <script src="js/home.js"></script>
+</body>
+</html>
